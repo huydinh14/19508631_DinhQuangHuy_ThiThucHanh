@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @Entity
-@Table(name = "Driver")
+@Table(name = "driver")
 public class Driver {
     @Id
     @Column(name = "driver_id")
