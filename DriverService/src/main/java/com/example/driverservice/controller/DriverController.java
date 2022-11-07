@@ -2,6 +2,7 @@ package com.example.driverservice.controller;
 
 import com.example.driverservice.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ public class DriverController {
     @Autowired
     DriverService driverService;
     @GetMapping("/findDriverAndCustomer")
+    @Cacheable(value = "driver_customer", key = "#id")
     public ResponseEntity findDriverAndCustomer(@RequestParam("id") int id){
         return new ResponseEntity(driverService.findDriverAndCustomer(id), HttpStatus.OK);
     }
