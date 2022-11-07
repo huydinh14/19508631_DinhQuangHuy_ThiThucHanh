@@ -27,3 +27,15 @@ eureka:
     serviceUrl.defaultZone: http://localhost:8761/eureka/
   instance:
     hostname: localhost
+
+resilience4j:
+  ratelimiter:
+    instances:
+      serviceA:
+        registerHealthIndicator: false
+        limitForPeriod: 10
+        limitRefreshPeriod: 10s
+        timeoutDuration: 3s
+
+
+

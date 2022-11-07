@@ -1,6 +1,7 @@
 package com.example.driverservice.controller;
 
 import com.example.driverservice.service.DriverService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ public class DriverController {
     DriverService driverService;
     @GetMapping("/findDriverAndCustomer")
     @Cacheable(value = "driver_customer", key = "#id")
+    @RateLimiter(name = "SERVICE_A")
     public ResponseEntity findDriverAndCustomer(@RequestParam("id") int id){
         return new ResponseEntity(driverService.findDriverAndCustomer(id), HttpStatus.OK);
     }
